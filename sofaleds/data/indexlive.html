@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+test<html>
+    <head>
+        <title>Sofaheld</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function pad(number, length) {
+                var str = '' + number;
+                while (str.length < length) {
+                    str = '0' + str;
+                }
+                return str;
+            }
+            window.onload = function () {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open('GET', 'live.json', true);
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4) {
+                        if (xmlhttp.status == 200) {
+                            var obj = JSON.parse(xmlhttp.responseText);
+                            for (i = 0; i < 8; i++) {
+                                tempi = 'c' + (i+1);
+                                var mycolors = document.getElementById(tempi);
+                                var temp = '#' + pad(obj.colors[i][0].toString(16), 2) + pad(obj.colors[i][1].toString(16), 2) + pad(obj.colors[i][2].toString(16), 2);
+                                if (mycolors != null)
+                                    mycolors.value = temp;
+                            }
+                            for (i = 0; i < 7; i++) {
+                                tempi = 'z' + (i+1);
+                                var mybands = document.getElementById(tempi);
+                                if (mybands != null)
+                                    mybands.selectedIndex = obj.band[i];
+                            }
+                            var segs = document.getElementById('segs');
+                            if (segs != null)
+                                segs.selectedIndex = obj.mainconfig[1]-1;
+								var mod = document.getElementById('mod');
+                            if (mod != null)
+                                mod.selectedIndex = obj.mainconfig[2];
+								var min = document.getElementById('min');
+                            if (min != null)
+                                min.defaultValue = obj.mainconfig[3];
+								var max = document.getElementById('max');
+                            if (max != null)
+                                max.defaultValue = obj.mainconfig[4];
+								var dim = document.getElementById('dim');
+                            if (dim != null)
+                                dim.defaultValue = obj.mainconfig[5];
+                            var ssid = document.getElementById("ssid");
+                            ssid.value = obj.ssid;
+                            var key = document.getElementById("key");
+                            key.value = obj.key;
+                            var ip = document.getElementById("ip");
+                            ip.value = obj.ip;
+                            var ledcount = document.getElementById("ledcount");
+                            ledcount.value = obj.mainconfig[0];
+
+                        }
+                    }
+                };
+                xmlhttp.send(null);
+                
+
+            }
+        </script>
+        <style>
+            input[type="color"] {
+                width: 80%;
+                background-color: lightblue;
+                margin: 0 auto;
+                border: none;
+            }
+            td{border-radius:10px;
+
+               text-align: center; 
+               background-color: lightblue;}
+
+        </style>
+    </head>
+    <body>
+        <form action="/" method="get">
+            <table width="100%" style="border-radius:10px;border: none;background-color: darkgray;"> 
+                <tr><td colspan="7"><h1><center>Configuration</center></h1></td></tr>
+                <tr><td colspan="7"><h2>Segments</h2></td></tr>
+                <tr><td colspan="7"><label> Ledcount: <input type="text" name="ledcount" id="ledcount" size="3"> 
+                        </label> <label>Segmente: <select name="segs" id="segs" size="1"> 
+                                <option>1</option> 
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option></select> </label> Segment Count </td></tr>
+								<tr><td colspan="7"><h2>Overview</h2></td></tr>
+								 <tr><td colspan="2"> <label>Modus <select name="mod" id="mod" size="1"> 
+                                <option value="0">Equalizer</option> 
+                                <option value="1">Lightmusic</option>
+								<option value="2">Ambient</option>
+								</select></td><td colspan="2"> <label>Level Min</label><input type="range" min="0" max="1024" name="min" id="min"></td><td colspan="3"><label>Level Max</label><input type="range" min="0" max="1024" name="max" id="max"></td></tr>
+                <tr><td colspan="7"><h2>Ambient</h2></td></tr>
+								 <tr><td colspan="2"></td><td colspan="2"> <label>Brightness</label><input type="range" min="0" max="255" name="dim" id="dim"></td><td colspan="3"><label>Color</label><input id="c8" name="c8" type="color" value="#000000"></td></tr>
+                
+                <tr><td colspan="7"><h2>Band to Color</h2></td></tr>
+                <tr>
+                    <td>Segment 1           
+                    </td><td>Segment 2
+                    </td><td>Segment 3
+                    </td><td>Segment 4
+                    </td><td>Segment 5
+                    </td><td>Segment 6
+                    </td><td>Segment 7
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>		<input id="c1" name="c1" type="color" value="#000000">
+                    </td>   <td><input id="c2" name="c2" type="color" value="#000000">
+                    </td>   <td><input id="c3" name="c3" type="color" value="#000000">
+                    </td>   <td><input id="c4" name="c4" type="color" value="#000000">
+                    </td>   <td><input id="c5" name="c5" type="color" value="#000000">
+                    </td>   <td><input id="c6" name="c6" type="color" value="#000000">
+                    </td>   <td><input id="c7" name="c7" type="color" value="#000000">
+                    </td>
+                </tr>
+                <tr><td><label><select id="z1" name="z1" size="1" > 
+                                <option value="0">63Hz</option>
+                                <option value="1">160Hz</option>
+                                <option value="2">400Hz</option>
+                                <option value="3">1Khz</option>
+                                <option value="4">2.5Khz</option>
+                                <option value="5">6.25Khz</option>
+                                <option value="6">16Khz</option>
+                            </select> </label>
+                    </td><td> <label><select id="z2" name="z2" size="1"> 
+                                  <option value="0">63Hz</option>
+                                <option value="1">160Hz</option>
+                                <option value="2">400Hz</option>
+                                <option value="3">1Khz</option>
+                                <option value="4">2.5Khz</option>
+                                <option value="5">6.25Khz</option>
+                                <option value="6">16Khz</option>
+                            </select> </label>
+                    </td><td><label><select id="z3" name="z3" size="1"> 
+                               <option value="0">63Hz</option>
+                                <option value="1">160Hz</option>
+                                <option value="2">400Hz</option>
+                                <option value="3">1Khz</option>
+                                <option value="4">2.5Khz</option>
+                                <option value="5">6.25Khz</option>
+                                <option value="6">16Khz</option>
+                            </select> </label>
+                    </td><td><label><select id="z4" name="z4" size="1"> 
+                                  <option value="0">63Hz</option>
+                                <option value="1">160Hz</option>
+                                <option value="2">400Hz</option>
+                                <option value="3">1Khz</option>
+                                <option value="4">2.5Khz</option>
+                                <option value="5">6.25Khz</option>
+                                <option value="6">16Khz</option>
+                            </select> </label>
+                    </td><td><label><select id="z5" name="z5" size="1"> 
+                                <option value="0">63Hz</option>
+                                <option value="1">160Hz</option>
+                                <option value="2">400Hz</option>
+                                <option value="3">1Khz</option>
+                                <option value="4">2.5Khz</option>
+                                <option value="5">6.25Khz</option>
+                                <option value="6">16Khz</option>
+                            </select> </label>
+                    </td><td><label><select id="z6" name="z6" size="1"> 
+                            <option value="0">63Hz</option>
+                                <option value="1">160Hz</option>
+                                <option value="2">400Hz</option>
+                                <option value="3">1Khz</option>
+                                <option value="4">2.5Khz</option>
+                                <option value="5">6.25Khz</option>
+                                <option value="6">16Khz</option>
+                            </select> </label>
+                    </td><td><label><select id="z7" name="z7" size="1"> 
+                                <option value="0">63Hz</option>
+                                <option value="1">160Hz</option>
+                                <option value="2">400Hz</option>
+                                <option value="3">1Khz</option>
+                                <option value="4">2.5Khz</option>
+                                <option value="5">6.25Khz</option>
+                                <option value="6">16Khz</option>
+                            </select> </label><br>
+
+                    </td></tr>
+                <tr><td colspan="7"><input type="submit" name="speichern" value="Test/Save"> <input type="radio" id="test" name="test" value="Test"> <label for="test">Save</label> </td></tr>
+                <tr><td colspan="7"><h2>IP Configuration</h2></td></tr>
+                <tr><td colspan="2">SSID</td>
+                    <td colspan="2">WLAN-KEY</td>
+                    <td colspan="2">IP(Optional)</td>
+                    <td >Action</td></tr>
+                <tr><td colspan="2"><input id="ssid" name="ssid" type="text" size="20"></td>
+                    <td colspan="2"><input id="key" name="key" type="password" size="20"></td>
+                    <td colspan="2"><input id="ip" name="ip" type="text" size="20"></td>
+                    <td ><input type="submit" name="network" value="Speichern"></td></tr>
+            </table>
+        </form>
+    </body>
+</html>
