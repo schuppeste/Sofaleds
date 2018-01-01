@@ -40,7 +40,7 @@ void setup() {
   digitalWrite(res, LOW);
   int apstatus = digitalRead(5);
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
-  Serial.begin(115200);
+  //Serial.begin(115200);
   if (!SPIFFS.begin()) {
     Serial.println("Failed to mount file system");
   }
@@ -113,8 +113,7 @@ void loop() {
       }
 
       FastLED.show();
-      Serial.println(mainconfig[2]);
-
+      
     }
 }
 void handleGenericArgs() { //Handler
