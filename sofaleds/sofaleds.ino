@@ -40,7 +40,7 @@ void setup() {
   digitalWrite(res, LOW);
   int apstatus = digitalRead(5);
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
-  //Serial.begin(115200);
+  Serial.begin(115200);
   if (!SPIFFS.begin()) {
     Serial.println("Failed to mount file system");
   }
@@ -112,49 +112,11 @@ void loop() {
         }
       }
 
+   
+
+    }
+    
       FastLED.show();
-      
-    }
-}
-void handleGenericArgs() { //Handler
-  if (server.arg("network") == "") {   //Parameter not found
-  } else {    //Parameter found
-    ssid = const_cast<char*>(server.arg("ssid").c_str());
-    key = const_cast<char*>(server.arg("key").c_str());
-    ip = const_cast<char*>(server.arg("ip").c_str());
-    saveConfig();
-  }
-  if (server.arg("speichern") == "") {
-  } else {
-    mainconfig[0] = server.arg("ledcount").toInt();
-    mainconfig[1] = server.arg("segs").toInt();
-    mainconfig[2] = server.arg("mod").toInt();
-    mainconfig[3] = server.arg("min").toInt();
-    mainconfig[4] = server.arg("max").toInt();
-    mainconfig[5] = server.arg("dim").toInt();
-    hex_to_rgb(colors[0], server.arg("c1"));
-    hex_to_rgb(colors[1], server.arg("c2"));
-    hex_to_rgb(colors[2], server.arg("c3"));
-    hex_to_rgb(colors[3], server.arg("c4"));
-    hex_to_rgb(colors[4], server.arg("c5"));
-    hex_to_rgb(colors[5], server.arg("c6"));
-    hex_to_rgb(colors[6], server.arg("c7"));
-    hex_to_rgb(colors[7], server.arg("c8"));
-    band[0] = server.arg("z1").toInt();
-    band[1] = server.arg("z2").toInt();
-    band[2] = server.arg("z3").toInt();
-    band[3] = server.arg("z4").toInt();
-    band[4] = server.arg("z5").toInt();
-    band[5] = server.arg("z6").toInt();
-    band[6] = server.arg("z7").toInt();
-    if (server.arg("test") == "") {   //Parameter not found
-    } else {
-      saveConfig();
-    }
-    ledcount = mainconfig[0];
-    mysegs = mainconfig[1];
-    mysegleds = ledcount / mysegs;
-  }
 }
 void handleRoot() {
   if (server.arg("network") == "") {   //Parameter not found
@@ -273,7 +235,7 @@ bool loadConfig() {
     Serial.println("Failed to parse config file");
     return false;
   }
-  for (int i = 0; i < 6; i++)
+  for (int i = 0; i < 7; i++)
   json["colors"][i].as<JsonArray>().copyTo(colors[i]);
   json["band"].as<JsonArray>().copyTo(band);
   json["mainconfig"].as<JsonArray>().copyTo(mainconfig);
