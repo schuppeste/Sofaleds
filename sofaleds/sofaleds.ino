@@ -235,7 +235,7 @@ bool loadConfig() {
     Serial.println("Failed to parse config file");
     return false;
   }
-  for (int i = 0; i < 7; i++)
+  for (int i = 0; i < 8; i++)
   json["colors"][i].as<JsonArray>().copyTo(colors[i]);
   json["band"].as<JsonArray>().copyTo(band);
   json["mainconfig"].as<JsonArray>().copyTo(mainconfig);
