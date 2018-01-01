@@ -86,9 +86,10 @@ void loop() {
     }
   } else
     for (int i = 0; i < mysegs; i++) {
-      int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 0, mysegleds);
+     
 
-      if (mainconfig[2] == 0) { //Equalizer
+      if (mainconfig[2] == 0) { 
+         int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 0, mysegleds);//Equalizer
         for (int h = 0; h < mysegleds; h++) {
           if (h < myvalue) {
             leds[i * mysegleds + h][0] = colors[i][0];
@@ -102,12 +103,13 @@ void loop() {
             leds[i * mysegleds + h][2] = 0;
           }
         }
-      } else if (mainconfig[2] == 1) { //Lichtorgel
+      } else if (mainconfig[2] == 1) {
+         int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 255, 0);//Lichtorgel
         for (int h = 0; h < mysegleds; h++) {
           leds[i * mysegleds + h][0] = colors[i][0];
           leds[i * mysegleds + h][1] = colors[i][1];
           leds[i * mysegleds + h][2] = colors[i][2];
-          leds[i] %= myvalue;
+          leds[i * mysegleds + h] %= myvalue;
 
         }
       }
