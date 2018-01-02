@@ -86,10 +86,10 @@ void loop() {
     }
   } else
     for (int i = 0; i < mysegs; i++) {
-     
 
-      if (mainconfig[2] == 0) { 
-         int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 0, mysegleds);//Equalizer
+
+      if (mainconfig[2] == 0) {
+        int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 0, mysegleds);//Equalizer
         for (int h = 0; h < mysegleds; h++) {
           if (h < myvalue) {
             leds[i * mysegleds + h][0] = colors[i][0];
@@ -104,21 +104,27 @@ void loop() {
           }
         }
       } else if (mainconfig[2] == 1) {
-         int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 0, 255);//Lichtorgel
+        int myvalue = map(all[band[i]], 0, 1024, 0, 255);//Lichtorgel
         for (int h = 0; h < mysegleds; h++) {
-          leds[i * mysegleds + h][0] = colors[i][0];
-          leds[i * mysegleds + h][1] = colors[i][1];
-          leds[i * mysegleds + h][2] = colors[i][2];
-          leds[i * mysegleds + h].fadeToBlackBy( myvalue );
+          if (myvalue >= mainconfig[6]) {
+            leds[i * mysegleds + h][0] = colors[i][0];
+            leds[i * mysegleds + h][1] = colors[i][1];
+            leds[i * mysegleds + h][2] = colors[i][2];
+            //leds[i * mysegleds + h].fadeToBlackBy( myvalue );
+          } else {
+            leds[i * mysegleds + h][0] = 0;
+            leds[i * mysegleds + h][1] = 0;
+            leds[i * mysegleds + h][2] = 0;
+          }
 
         }
       }
 
-   
+
 
     }
-    
-      FastLED.show();
+
+  FastLED.show();
 }
 void handleRoot() {
   if (server.arg("network") == "") {   //Parameter not found
@@ -239,7 +245,7 @@ bool loadConfig() {
     return false;
   }
   for (int i = 0; i < 8; i++)
-  json["colors"][i].as<JsonArray>().copyTo(colors[i]);
+    json["colors"][i].as<JsonArray>().copyTo(colors[i]);
   json["band"].as<JsonArray>().copyTo(band);
   json["mainconfig"].as<JsonArray>().copyTo(mainconfig);
   ssid = json["ssid"].as<String>();
