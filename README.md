@@ -13,3 +13,5 @@ SPIFF Uploader: https://github.com/esp8266/arduino-esp8266fs-plugin
 
 
 [Demo-Video](https://www.youtube.com/watch?v=kdofwnRlx2k)
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
