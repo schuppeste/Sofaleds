@@ -104,12 +104,12 @@ void loop() {
           }
         }
       } else if (mainconfig[2] == 1) {
-         int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 255, 0);//Lichtorgel
+         int myvalue = map(all[band[i]], mainconfig[3], mainconfig[4], 0, 255);//Lichtorgel
         for (int h = 0; h < mysegleds; h++) {
           leds[i * mysegleds + h][0] = colors[i][0];
           leds[i * mysegleds + h][1] = colors[i][1];
           leds[i * mysegleds + h][2] = colors[i][2];
-          leds[i * mysegleds + h] %= myvalue;
+          leds[i * mysegleds + h].fadeToBlackBy( myvalue );
 
         }
       }
@@ -142,6 +142,7 @@ void handleRoot() {
     mainconfig[3] = server.arg("min").toInt();
     mainconfig[4] = server.arg("max").toInt();
     mainconfig[5] = server.arg("dim").toInt();
+    mainconfig[6] = server.arg("thr").toInt();
     hex_to_rgb(colors[0], server.arg("c1"));
     hex_to_rgb(colors[1], server.arg("c2"));
     hex_to_rgb(colors[2], server.arg("c3"));
