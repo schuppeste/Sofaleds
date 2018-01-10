@@ -93,23 +93,7 @@ display: flex;
    margin: 10px;
     background-color: CornflowerBlue;
 }
-legend {
-    display: block;
-    padding-left: 2px;
-    padding-right: 2px;
-    border: none;
-}
-.row {
-    border: 0px solid red;
-    display: flex;
-    width: 100%;
-    border-spacing: 0px; /* For controlling spacing between cells... */
-}
-.item {
-    background: rgba(0,0,0,0.1);
-    display: table-cell;
-   vertical-align: middle;
-}
+
 .myinput{
 	float: none;
    width: 47%;
