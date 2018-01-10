@@ -81,34 +81,7 @@ display: flex;
   width: 45%;
   margin: 5px;
 }
-.second{
-    float: left;
-    width: 90%;
-  
-    background-color: CornflowerBlue;
-}
 
-
-.third{
-    float: left;
-    width: 90%;
-   
-    background-color: CornflowerBlue;
-}
-
-.fourth {
-    float: left;
-    width: 90%;
-  
-    background-color: CornflowerBlue;
-}
-
-.last{
-    float: left;
-    width: 90%;
-    height: 100px;
-   
-}
 .tile{
  	padding-top: 10px;
    padding-right: 10px;
