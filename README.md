@@ -12,6 +12,10 @@ Used to upload Files in Sketchfolder/data to SPIFF
 SPIFF Uploader: https://github.com/esp8266/arduino-esp8266fs-plugin
 
 
-[Demo-Video](https://www.youtube.com/watch?v=kdofwnRlx2k)
+[Demo-Video](https://www.youtube.com/watch?v=mlMS-kUvTjY)
 
 ![ExamplePicture](https://github.com/schuppeste/Sofaleds/blob/master/example.jpg)
+
+![Schematic](https://github.com/schuppeste/Sofaleds/blob/master/schematic.jpg)
+
+![ExampleBoard](https://github.com/schuppeste/Sofaleds/blob/master/board.jpg)
