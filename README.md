@@ -21,4 +21,5 @@ SPIFF Uploader: https://github.com/esp8266/arduino-esp8266fs-plugin
 
 ![ExampleBoard](https://github.com/schuppeste/Sofaleds/blob/master/board.jpg)
 
-![ExampleBoardPic](https://github.com/schuppeste/Sofaleds/blob/master/boardpic.jpg)
+![ExamplePic](https://github.com/schuppeste/Sofaleds/blob/master/boardpic.jpg)
+
