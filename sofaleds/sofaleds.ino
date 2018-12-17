@@ -38,7 +38,7 @@ void setup() {
   pinMode(strobe, OUTPUT);
   digitalWrite(res, HIGH);
   digitalWrite(res, LOW);
-  int apstatus = digitalRead(5);
+  //int apstatus = digitalRead(5);
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
   Serial.begin(115200);
   if (!SPIFFS.begin()) {
@@ -47,7 +47,7 @@ void setup() {
   else if (loadConfig()) {
   }
   WiFi.hostname("sofaleds");
-  if (ssid == "" || key == "" || apstatus == LOW) {
+  if (ssid == "" || key == "" ) { //|| apstatus == LOW
     WiFi.softAP("Sofaheld", "sofaheld"); //Create Access Point
     WiFi.softAPConfig(local_IP, gateway, subnet);
   } else {
